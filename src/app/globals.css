@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .navLink {
+    @apply py-4 rounded-md text-black  px-2 hover:text-[#222222] items-center transition-all flex gap-[10px] duration-200;
+  }
+}

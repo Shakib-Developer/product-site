@@ -1,0 +1,45 @@
+-- CreateTable
+CREATE TABLE `users` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `firstName` VARCHAR(50) NOT NULL,
+    `lastName` VARCHAR(50) NOT NULL,
+    `mobile` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
+    `password` VARCHAR(50) NOT NULL,
+    `createAt` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `updateAt` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+
+    UNIQUE INDEX `users_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `category` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(100) NOT NULL,
+    `imgCDN` VARCHAR(300) NOT NULL,
+    `createAt` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `updateAt` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `product` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `imgCDN` VARCHAR(300) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `keyword` VARCHAR(100) NOT NULL,
+    `type` VARCHAR(100) NOT NULL,
+    `des` VARCHAR(60000) NOT NULL,
+    `price` VARCHAR(50) NOT NULL,
+    `catID` INTEGER NOT NULL,
+    `createAt` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+    `updateAt` TIMESTAMP(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0),
+
+    UNIQUE INDEX `product_catID_key`(`catID`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `product` ADD CONSTRAINT `product_catID_fkey` FOREIGN KEY (`catID`) REFERENCES `category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
